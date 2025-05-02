@@ -1,0 +1,13 @@
+---
+- name: Gather structured facts for network resources
+  hosts: network # This targets the group in your AAP Inventory
+  gather_facts: false
+  tasks:
+    - name: Invoke gather role
+      ansible.builtin.include_role:
+        name: network.reports.gather
+      vars:
+        format: yaml
+        resources:
+          - "bgp_global"
+          - "bgp_address_family"
