@@ -1,0 +1,16 @@
+- name: persist
+  hosts: network
+  become: true
+  tasks:
+    - name: Persist report
+      ansible.builtin.include_role:
+        name: network.reports.persist
+      vars:
+        format: json
+        resources:
+          - "bgp_global"
+          - "bgp_address_family"
+
+    
+        data_store:
+          local: "~/data/network"
