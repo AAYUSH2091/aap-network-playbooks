@@ -1,0 +1,23 @@
+- name: Gather structured facts for network resources
+  hosts: network
+  gather_facts: false
+  tasks:
+    - name: Invoke gather role
+      ansible.builtin.include_role:
+        name: network.reports.gather
+      vars:
+        resources: 
+        - "interfaces"
+        - "ospf_interfaces"
+        - "ospfv2"
+        - "ospfv3"
+        - "bgp_address_family"
+        - "bgp_global"
+        
+- name: generate report
+  hosts: localhost
+  become: true
+  tasks:
+    - name: invoke network.reports.gather
+      ansible.builtin.include_role:
+        name: network.reports.generate_report
