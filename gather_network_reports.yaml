@@ -7,7 +7,7 @@
       ansible.builtin.include_role:
         name: network.reports.gather
       vars:
-        format: yaml
+        format: json
         resources:
           - "bgp_global"
           - "bgp_address_family"
